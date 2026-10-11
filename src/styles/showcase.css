@@ -1,0 +1,632 @@
+/* ============================================
+   SHOWCASE - one glass sheet
+   The head, then the Flagship build inside the glass: the five-tab product
+   mock, the copy and CTA, and the testimonial marquee under them. The page
+   scrolls; the marquee is the only thing that moves on its own.
+   ============================================ */
+
+.ktools { height: auto; }
+.ktools__glass { height: auto; min-height: 0; }
+
+@media (min-width: 1100px) {
+  .ktools { padding-top: clamp(16px, 2.5vh, 26px); gap: clamp(12px, 1.8vh, 20px); }
+  .ktools .pgrid__title { font-size: clamp(22px, 1.8vw, 32px); }
+  .ktools .pgrid__lede { font-size: clamp(12.5px, 0.8vw, 14.5px); }
+}
+
+/* ---------- The head, with the badge card ----------
+   Copy on the left, the badge card bottom-right, so it sits on the baseline
+   of the lede rather than as a stray strip under it. */
+@media (min-width: 1100px) {
+  .ktools__head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(20px, 3vw, 48px);
+  }
+}
+.ktools__head-copy { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ktools__vote { display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto; }
+.ktools__vote-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ktools__vote-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255, 122, 26, 0.5); }
+.ktools__vote-ask { color: var(--orange-ink); }
+.ktools__vote-frame {
+  width: 320px;
+  height: 72px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow:
+    inset 0 0 0 1px var(--line-strong),
+    0 14px 30px -22px rgba(6, 12, 26, 0.5);
+}
+.ktools__vote-frame iframe { display: block; }
+.ktools__vote-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px 0 12px;
+  text-decoration: none;
+  color: var(--muted);
+}
+.ktools__vote-card img { flex: 0 0 auto; width: 48px; height: 48px; }
+.ktools__vote-text { font-size: 13px; font-weight: 600; line-height: 1.3; }
+
+/* ---------- Layout ----------
+   On Projects, Flagship is a two-column callout: a tall copy column beside
+   the product mock. That column is the widest thing on the page and it left
+   the mock about half the sheet, which is the wrong split when the mock IS
+   the subject. Here every band runs the full width instead - identity strip,
+   then the mock, then the tab rail and caption, then the testimonials.
+
+   Flagship also carries its own top margin, padding and rule for hanging off
+   the bottom of Projects. Here it IS the page, so those come off. */
+.ktools .flagship {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "header"
+    "showcase"
+    "feedback";
+  column-gap: 0;
+  row-gap: clamp(22px, 3vw, 40px);
+}
+
+/* The identity strip - clean, organized two-column / stacked layout */
+.ktools .flagship__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: clamp(18px, 2.5vw, 26px);
+  border-bottom: 1px solid var(--line);
+  width: 100%;
+}
+@media (min-width: 960px) {
+  .ktools .flagship__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) auto;
+    grid-template-areas:
+      "meta cta"
+      "desc cta";
+    column-gap: clamp(32px, 4vw, 56px);
+    row-gap: 10px;
+    align-items: center;
+  }
+}
+.ktools .flagship__header-meta {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ktools .flagship__eyebrow {
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+.ktools .flagship__title {
+  margin: 0;
+  font-size: clamp(20px, 1.7vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--navy);
+  white-space: normal;
+}
+.ktools .flagship__desc {
+  grid-area: desc;
+  max-width: 68ch;
+  font-size: clamp(12.5px, 0.8vw, 14px);
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+.ktools .flagship__cta { margin-top: 0; white-space: nowrap; }
+.ktools .flagship__ctas { grid-area: cta; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.flagship__ctas { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.flagship__cta--secondary {
+  background: transparent !important;
+  color: var(--navy) !important;
+  box-shadow: inset 0 0 0 1px var(--line-strong) !important;
+}
+.flagship__cta--secondary:hover {
+  background: var(--tint) !important;
+  box-shadow: inset 0 0 0 1px var(--orange) !important;
+}
+.flagship__cta--secondary svg { color: var(--navy) !important; }
+[data-theme='dark'] .flagship__cta--secondary {
+  color: #EDF0F6 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16) !important;
+}
+[data-theme='dark'] .flagship__cta--secondary svg { color: #EDF0F6 !important; }
+[data-theme='dark'] .flagship__cta--secondary:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 0 0 1px var(--orange) !important;
+}
+
+/* Deployed iframe and screenshot container */
+.flagship__iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #ffffff;
+  display: block;
+}
+.flagship__image-wrap {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #0E1628;
+  display: block;
+}
+.flagship__screenshot {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Device bar actions & badges */
+.flagship__device-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.flagship__badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.flagship__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.flagship__badge-screen {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.flagship__device-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.flagship__device-link:hover {
+  background: var(--orange);
+  color: #0B1120;
+}
+.flagship__device-link svg { color: inherit; }
+
+.ktools__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--line-strong);
+  margin: clamp(32px, 4vw, 56px) 0;
+}
+
+
+/* The mock now gets the whole sheet. Its 16/10 aspect would make it ~880px
+   tall at this width and push everything else off the fold, so height leads
+   here and the aspect follows. The stage is a container query on inline size,
+   so its type keeps scaling off the width either way. */
+.ktools .flagship__device-screen {
+  aspect-ratio: auto;
+  height: clamp(340px, 44vh, 480px);
+}
+
+/* The tab rail and its caption were stacked under a narrow column. Across the
+   full width they sit side by side, with the progress bars staying under the
+   tabs they belong to. */
+.ktools .flagship__panel {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  grid-template-areas:
+    "tabs     caption"
+    "progress caption";
+  column-gap: clamp(24px, 3vw, 48px);
+  row-gap: 10px;
+  align-items: start;
+}
+.ktools .flagship__tabs { grid-area: tabs; }
+.ktools .flagship__progress { grid-area: progress; margin-top: 0; }
+.ktools .flagship__caption {
+  grid-area: caption;
+  align-self: center;
+  min-height: 0;
+  max-width: 72ch;
+}
+
+/* Remove testimonials in showcase view */
+.ktools .flagship__feedback {
+  display: none !important;
+}
+.ktools .flagship {
+  grid-template-areas:
+    "header"
+    "showcase";
+}
+
+/* ---------- Below the shell ----------
+   The three-column identity strip needs real width to be a strip; under it,
+   the copy stacks the way Flagship's own responsive rules already stack the
+   showcase and the feedback. */
+@media (max-width: 1099px) {
+  .ktools .flagship__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: clamp(16px, 3vw, 24px);
+  }
+  /* The strip's grid placement is inert here, but its align-self is not: in a
+     column flex box the cross axis is horizontal, so `end` would throw the
+     eyebrow to the right edge. */
+  .ktools .flagship__eyebrow,
+  .ktools .flagship__title { align-self: auto; }
+  .ktools .flagship__title { white-space: normal; }
+  .ktools .flagship__desc { max-width: 60ch; }
+  .ktools .flagship__cta { margin-top: 2px; }
+
+  .ktools .flagship__device-screen { aspect-ratio: 16 / 10; height: auto; }
+
+  .ktools .flagship__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+/* ---------- Dark theme ----------
+   Flagship is a light-theme object: navy ink, navy hairlines, navy empty
+   stars, a navy-on-white active pill. Every one of those goes invisible once
+   the tokens invert, so repaint the set. The product mock is the deliberate
+   exception - it keeps its own static blue and white so it reads as a
+   separate product. */
+[data-theme='dark'] .ktools .flagship__tabs {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+[data-theme='dark'] .ktools .flagship__tab.is-active {
+  background: var(--orange);
+  color: #0B1120;
+}
+[data-theme='dark'] .ktools .flagship__tab.is-active .flagship__tab-icon { color: #0B1120; }
+[data-theme='dark'] .ktools .flagship__tab:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.07);
+}
+[data-theme='dark'] .ktools .flagship__cta { background: var(--orange); color: #0B1120; }
+[data-theme='dark'] .ktools .flagship__cta svg { color: #0B1120; }
+[data-theme='dark'] .ktools .flagship__feedback-card { border-color: rgba(255, 255, 255, 0.10); }
+[data-theme='dark'] .ktools .flagship__feedback-name { color: var(--navy); }
+[data-theme='dark'] .ktools .flagship__feedback-author { border-top-color: rgba(255, 255, 255, 0.10); }
+/* :not(.is-filled) or this outranks the fill rule and greys out every star. */
+[data-theme='dark'] .ktools .flagship__feedback-star:not(.is-filled) { color: rgba(255, 255, 255, 0.20); }
+[data-theme='dark'] .ktools .flagship__feedback-pause {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+[data-theme='dark'] .ktools .flagship__feedback-pause:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 122, 26, 0.45);
+}
+
+/* ---------- Showcase Coming Soon State ---------- */
+.showcase-status-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--tint);
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.showcase-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(36px, 6vh, 64px) clamp(20px, 4vw, 48px);
+  gap: clamp(18px, 2.6vh, 26px);
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.showcase-empty__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+  background: rgba(255, 122, 26, 0.12);
+  border: 1px solid rgba(255, 122, 26, 0.25);
+}
+
+.showcase-empty__title {
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 700;
+  letter-spacing: var(--ls-display);
+  line-height: 1.15;
+  color: var(--navy);
+  margin: 0;
+}
+
+.showcase-empty__desc {
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 65ch;
+  margin: 0;
+}
+
+.showcase-empty__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.showcase-empty__card {
+  padding: 22px 20px;
+  border-radius: 18px;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 14px -6px rgba(6, 12, 26, 0.15);
+}
+
+.showcase-empty__card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--tint);
+  display: grid;
+  place-items: center;
+  color: var(--orange);
+  margin-bottom: 4px;
+}
+
+.showcase-empty__card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+
+.showcase-empty__card-meta {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--orange-ink);
+  margin: 0;
+}
+
+.showcase-empty__card-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+.showcase-empty__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* ---------- Showcase: Additional Projects Grid ---------- */
+.showcase-more {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.5vw, 24px);
+  width: 100%;
+}
+.showcase-more__head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.showcase-more__eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+.showcase-more__title {
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+.showcase-more__lede {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  max-width: 65ch;
+  line-height: 1.55;
+}
+.showcase-more__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.showcase-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  overflow: hidden;
+  box-shadow: 0 4px 18px -8px rgba(6, 12, 26, 0.2);
+  transition: transform var(--dur-med) var(--ease-spring), border-color var(--dur-fast) var(--ease-out);
+}
+.showcase-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+}
+.showcase-card__media {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #0E1628;
+  overflow: hidden;
+}
+.showcase-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 600ms var(--ease-out);
+}
+.showcase-card:hover .showcase-card__img {
+  transform: scale(1.04);
+}
+.showcase-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 20px;
+  flex: 1 1 auto;
+}
+.showcase-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.showcase-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.showcase-card__badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--tint);
+  color: var(--orange-ink);
+}
+.showcase-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+  line-height: 1.25;
+}
+.showcase-card__desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  flex: 1 1 auto;
+}
+.showcase-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.showcase-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.showcase-card__btn--primary {
+  background: var(--navy-ink);
+  color: #fff;
+}
+.showcase-card__btn--primary:hover {
+  background: var(--navy);
+}
+.showcase-card__btn--secondary {
+  background: var(--tint);
+  color: var(--navy);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.showcase-card__btn--secondary:hover {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--orange);
+}
+[data-theme='dark'] .showcase-card__btn--primary {
+  background: var(--orange);
+  color: #0B1120;
+}
+[data-theme='dark'] .showcase-card__btn--secondary {
+  color: #EDF0F6;
+}
+
+
