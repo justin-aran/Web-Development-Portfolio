@@ -143,5 +143,5 @@ export const tagColors: Record<FunnelTag, string> = {
   'Academic': '#2563EB',
   Leadership: '#ec4899',
   Community: '#16A34A',
-  Website: '#FF7A1A',
+  Website: '#136980',
 }
